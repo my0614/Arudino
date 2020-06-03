@@ -1,0 +1,12 @@
+void setup()
+{
+pinMode(13,OUTPUT);
+}
+
+void loop()
+{
+// A0에 들어있는 값을 변수에 저장
+	int analog = analogRead(A0);
+// 그 값을 Led에 넣어주기
+	analogWrite(13,analog);
+}
