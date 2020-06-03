@@ -1,0 +1,28 @@
+int ledpin[] = {6,7,8,9};
+void setip() {
+int index;
+for (index = 0; index<4;index++)
+	pinMode(ledpin[index], OUTPUT);
+
+}
+
+void loop()
+{
+	start();
+}
+
+
+void start()
+{
+	for(i = 0; i<4;i++)
+	{
+			digitalWrite(ledpin[i],HIGH);
+			delay(100);
+	}
+	for(i=4;i>=0;i--)
+	{
+		digitalWrite(ledpin[i],LOW);
+		delay(100);
+	}
+
+}
