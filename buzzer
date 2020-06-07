@@ -1,0 +1,15 @@
+#include <PlayMelody.h>
+int amp = 0 ;
+void setup() {
+pinMode(8,OUTPUT);
+}
+
+void loop(){
+amp = analogRead(0)/10;
+digitalWrite(8,1);
+delayMicroseconds(amp);
+digitalWrite(8,0);
+}
+
+★음의 높낮이 : 1136-analogRead(A0);
+★음의 성량 :  analogRead(A0)/10;
