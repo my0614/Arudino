@@ -1,0 +1,28 @@
+#include <Stepper.h>
+
+// 2048:한바퀴(360도), 1024:반바퀴(180도)...
+const int stepsPerRevolution = 2048; 
+// 모터 드라이브에 연결된 핀 IN4, IN2, IN3, IN1
+Stepper myStepper(stepsPerRevolution,12,10,11,8);           
+void setup() {
+  myStepper.setSpeed(500); 
+  Serial.begin(9600);
+}
+void loop() {
+  // 시계 반대 방향으로 한바퀴 회전
+  int value = analogRead(A0);
+  Serial.println(value);
+
+  if(value < 300)
+  {
+    myStepper.step(1);
+    delay(15);
+  } 
+
+  else if(value > 800)
+  {
+    myStepper.step(-1);
+    delay(15);
+    }
+  
+}
