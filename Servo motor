@@ -1,0 +1,24 @@
+#include <Servo.h> // Servo 헤더파일
+
+Servo myservo;
+
+int sw = 6; // 스위치핀번호
+// 서보모터의 회전 각도입니다.
+
+void setup() {
+
+  myservo.attach(7); // servo를 7번핀으로
+  pinMode(sw, INPUT_PULLUP); // 스위치 INPUT_PULLUP 모드로 
+}
+
+void loop() {
+  //스위치가 off 였을때
+  if (digitalRead(sw) == LOW) { 
+      myservo.write(180);    // 180도회전
+    }
+   // 스위치가 on 일때
+  if(digitalRead(sw) == HIGH)
+   {
+     myservo.write(30); // 30도 회전
+  }
+}
