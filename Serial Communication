@@ -1,0 +1,43 @@
+#include <Servo.h>
+
+int angle; // 자동문
+int red = 13, green =12; // LED 설정
+Servo myservo;
+
+void setup() {
+  Serial.begin(9600); // 시리얼 통신
+  myservo.attach(7);
+  digitalWrite(green,LOW);
+  digitalWrite(red,LOW);
+
+}
+
+void loop() {
+  if(Serial.available())
+  {
+    byte data = Serial.read();
+
+    if(char(data) == '0') // 조건문(문열림)
+    {
+      for(angle =0; angle <=180;angle++)
+      {
+        myservo.write(angle); // 서보모터 회전
+        delay(5); // 딜레이
+      }
+      digitalWrite(green,HIGH);
+    }
+
+   if(char(data) == '1') // 조건문
+      {
+        for(angle =180; angle >=0;angle--)
+        {
+          myservo.write(angle); // 서보모터 회전
+          delay(5); // 딜레이
+        }
+        digitalWrite(red, HIGH);
+      }
+  
+      
+    }
+
+}
