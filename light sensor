@@ -1,0 +1,14 @@
+void setup()
+{
+pinMode(3,OUTPUT);
+}
+
+void loop()
+{
+int value = analog(A0);
+
+if(value > 220tnqnstn)
+	digitalWrite(3, HIGH);
+else
+	digitalWrite(3, LOW);
+}
