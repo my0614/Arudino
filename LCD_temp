@@ -1,0 +1,66 @@
+include <Wire.h>                       
+#include <LiquidCrystal_I2C.h>   
+LiquidCrystal_I2C lcd(0x3F,16,2);     
+
+int temp_sensor = A0; // 온도센서
+int motor = 3; // 모터
+
+String ReadSerial()
+{
+  String str= "";
+  char ch;
+
+   while( Serial.available() > 0 )   
+
+    {   
+
+      ch = Serial.read();   
+
+      str.concat(ch);   
+
+      delay(10);  
+
+    }   
+
+    return str;   
+  
+  }
+
+void setup()
+{
+  Serial.begin(9600);  
+  pinMode(motor,OUTPUT);   // 모터 출력모드
+  lcd.init();              // LCD 초기화
+  lcd.backlight();        // 백 라이트 켜기
+}
+
+void loop() 
+{
+   String str;
+   str =ReadSerial();
+   println(str.toInt());
+   int sensor = analogRead(temp_sensor);
+   float value = sensor * 5000.0/1024.0;     // 온도센서의 값을 전압으로 변환
+   float result = (value - 500) / 10.0;     // 전압을 온도로 변환
+   floor(result); // 소숫점버리기
+   lcd.setCursor(0,0);             // 1번째, 1라인
+  lcd.print("temperatur");
+  lcd.setCursor(3,1);             // 7번째, 2라인
+  lcd.print(result);
+  lcd.setCursor(10,1);             // 12번째, 2라인
+  lcd.print(" C");
+  
+   if(str != "")
+   {
+      if(str.toInt() > reuslt)
+      {
+        analogWrite(motor, 200); // 모터 회전
+      }  
+      else
+        analogWrite(motor, 0); // 모터 회전 중지
+   }
+  
+  delay(1000);
+ 
+  
+}
